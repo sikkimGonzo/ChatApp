@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="app_text">Hello, Android!</string>
+	<string name="user_name">Levi</string>
+	<string name="bot_name">Rainer</string>
+	<string name="text_edit_text">Message</string>
+	<string-array name="bot_answers">
+		<item>That is really funny.</item>
+		<item>Hbu?</item>
+		<item>Whatever man</item>
+	</string-array>
+</resources>
