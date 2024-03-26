@@ -41,17 +41,27 @@ namespace ChatApp
             var lastMessage = chat.Messages.LastOrDefault();
 
             chatNameTextView.Text = chat.Name;
-            lastMessageTextView.Text = lastMessage?.Text;
-            var messageDate = lastMessage.Date;
-            var nowDate = DateTime.Now;
 
-            lastMessageDateTextView.Text =
-                messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
-                ? messageDate.ToShortTimeString()
-                : messageDate.ToString();
-            lastMessageSenderNameTextView.Text = lastMessage?.Sender;
-            dots.Text = lastMessage is null ? "" : ": ";
+            if (lastMessage == null)
+            {
+                lastMessageTextView.Text = "";
+                lastMessageDateTextView.Text = "";
+                lastMessageSenderNameTextView.Text = "";
+                dots.Text = "";
+            }
+            else
+            {
+                var messageDate = lastMessage.Date;
+                var nowDate = DateTime.Now;
 
+                lastMessageTextView.Text = lastMessage.Text;
+                lastMessageDateTextView.Text =
+                    messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
+                    ? messageDate.ToShortTimeString()
+                    : messageDate.ToString();
+                lastMessageSenderNameTextView.Text = lastMessage?.Sender;
+                dots.Text = ": ";
+            }
             return view;
         }
     }

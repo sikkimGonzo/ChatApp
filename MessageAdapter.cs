@@ -35,10 +35,10 @@ namespace ChatApp
             var messageSenderTextView = view.FindViewById<TextView>(Resource.Id.senderName);
 
             var message = _messages[position];
-
-            messageTextView.Text = message.Text;
             var messageDate = message.Date;
             var nowDate = DateTime.Now;
+
+            messageTextView.Text = message.Text;
             messageDateTextView.Text = 
                 messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
                 ? messageDate.ToShortTimeString()
