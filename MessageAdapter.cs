@@ -30,20 +30,32 @@ namespace ChatApp
         {
             var view = convertView ?? _activity.LayoutInflater.Inflate(Resource.Layout.MessageItem, null);
 
-            var messageTextView = view.FindViewById<TextView>(Resource.Id.messageText);
-            var messageDateTextView = view.FindViewById<TextView>(Resource.Id.messageDate);
-            var messageSenderTextView = view.FindViewById<TextView>(Resource.Id.senderName);
+            var messageTextView = view?.FindViewById<TextView>(Resource.Id.messageText);
+            var messageDateTextView = view?.FindViewById<TextView>(Resource.Id.messageDate);
+            var messageSenderTextView = view?.FindViewById<TextView>(Resource.Id.senderName);
 
             var message = _messages[position];
-            var messageDate = message.Date;
-            var nowDate = DateTime.Now;
 
-            messageTextView.Text = message.Text;
-            messageDateTextView.Text = 
-                messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
-                ? messageDate.ToShortTimeString()
-                : messageDate.ToString();
-            messageSenderTextView.Text = message.Sender;
+            if(messageTextView is not null)
+            {
+                messageTextView.Text = message.Text;
+            }
+            if(messageDateTextView is not null)
+            {
+                if (message.Date is not null)
+                {
+                    var messageDate = (DateTime)message.Date;
+                    var nowDate = DateTime.Now;
+                    messageDateTextView.Text =
+                        messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
+                        ? messageDate.ToShortTimeString()
+                        : messageDate.ToString();
+                }
+            }
+            if(messageSenderTextView is not null)
+            {
+                messageSenderTextView.Text = message.Sender;
+            }
 
             return view;
         }

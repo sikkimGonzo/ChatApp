@@ -31,37 +31,52 @@ namespace ChatApp
         {
             var view = convertView ?? _activity.LayoutInflater.Inflate(Resource.Layout.ChatItem, null);
 
-            var chatNameTextView = view.FindViewById<TextView>(Resource.Id.chatName);
-            var lastMessageTextView = view.FindViewById<TextView>(Resource.Id.lastMessageText);
-            var lastMessageDateTextView = view.FindViewById<TextView>(Resource.Id.lastMessageDate);
-            var lastMessageSenderNameTextView = view.FindViewById<TextView>(Resource.Id.lastMessageSenderName);
-            var dots = view.FindViewById<TextView>(Resource.Id.dots);
+            var chatNameTextView = view?.FindViewById<TextView>(Resource.Id.chatName);
+            var lastMessageTextView = view?.FindViewById<TextView>(Resource.Id.lastMessageText);
+            var lastMessageDateTextView = view?.FindViewById<TextView>(Resource.Id.lastMessageDate);
+            var lastMessageSenderNameTextView = view?.FindViewById<TextView>(Resource.Id.lastMessageSenderName);
+            var dots = view?.FindViewById<TextView>(Resource.Id.dots);
 
             var chat = _chats[position];
-            var lastMessage = chat.Messages.LastOrDefault();
-
-            chatNameTextView.Text = chat.Name;
-
-            if (lastMessage == null)
+            if (chat is not null && chat.Messages is not null)
             {
-                lastMessageTextView.Text = "";
-                lastMessageDateTextView.Text = "";
-                lastMessageSenderNameTextView.Text = "";
-                dots.Text = "";
-            }
-            else
-            {
-                var messageDate = lastMessage.Date;
-                var nowDate = DateTime.Now;
+                var lastMessage = chat.Messages.LastOrDefault();
 
-                lastMessageTextView.Text = lastMessage.Text;
-                lastMessageDateTextView.Text =
-                    messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
-                    ? messageDate.ToShortTimeString()
-                    : messageDate.ToString();
-                lastMessageSenderNameTextView.Text = lastMessage?.Sender;
-                dots.Text = ": ";
+                if (chatNameTextView is not null)
+                {
+                    chatNameTextView.Text = chat?.Name;
+                }
+                if (lastMessageTextView is not null)
+                {
+                    lastMessageTextView.Text = lastMessage == null ? "" : lastMessage.Text;
+                }
+                if (lastMessageDateTextView is not null)
+                {
+                    lastMessageDateTextView.Text = "";
+                    if (lastMessage != null)
+                    {
+                        if (lastMessage.Date != null)
+                        {
+                            var messageDate = (DateTime)lastMessage.Date;
+                            var nowDate = DateTime.Now;
+                            var date = messageDate.Day == nowDate.Day && messageDate.Month == nowDate.Month && messageDate.Year == nowDate.Year
+                                ? messageDate.ToShortTimeString()
+                                : messageDate.ToString();
+                            lastMessageDateTextView.Text = date;
+                        }
+                    }
+
+                }
+                if (lastMessageSenderNameTextView is not null)
+                {
+                    lastMessageSenderNameTextView.Text = lastMessage == null ? "" : lastMessage?.Sender;
+                }
+                if (dots is not null)
+                {
+                    dots.Text = lastMessage == null ? "" : ": ";
+                }
             }
+
             return view;
         }
     }

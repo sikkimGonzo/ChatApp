@@ -16,8 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Chat Name" />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
@@ -28,8 +27,7 @@
             android:id="@+id/lastMessageDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Time" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,8 +41,7 @@
             android:id="@+id/lastMessageSenderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Sender" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/dots"
@@ -58,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Last Message"
             android:maxLines="1"
             android:ellipsize="end"
             android:singleLine="true"/>

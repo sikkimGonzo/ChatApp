@@ -4,6 +4,7 @@
 	<string name="user_name">Levi</string>
 	<string name="bot_name">Rainer</string>
 	<string name="text_edit_text">Message</string>
+	<string name="chat_name"></string>
 	<string-array name="bot_answers">
 		<item>That is really funny.</item>
 		<item>Hbu?</item>
